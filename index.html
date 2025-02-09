@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Picture Gallery</title>
+    <style>
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .image-card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        .like-button {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .liked {
+            background-color: #28a745;
+        }
+        #bg-selector {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="bg-selector">
+        <input type="file" accept="image/*" id="background-input">
+        <button onclick="changeBackground()">Set Background</button>
+    </div>
+    
+    <div class="gallery">
+        <div class="image-card">
+            <img src="image1.jpg" alt="Image 1" width="200">
+            <button class="like-button" onclick="toggleLike(this)">Like</button>
+        </div>
+        <div class="image-card">
+            <img src="image2.jpg" alt="Image 2" width="200">
+            <button class="like-button" onclick="toggleLike(this)">Like</button>
+        </div>
+        <div class="image-card">
+            <img src="image3.jpg" alt="Image 3" width="200">
+            <button class="like-button" onclick="toggleLike(this)">Like</button>
+        </div>
+        <div class="image-card">
+            <img src="image4.jpg" alt="Image 4" width="200">
+            <button class="like-button" onclick="toggleLike(this)">Like</button>
+        </div>
+        <div class="image-card">
+            <img src="image5.jpg" alt="Image 5" width="200">
+            <button class="like-button" onclick="toggleLike(this)">Like</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleLike(button) {
+            if (button.classList.contains('liked')) {
+                button.classList.remove('liked');
+                button.innerText = 'Like';
+            } else {
+                button.classList.add('liked');
+                button.innerText = 'Unlike';
+            }
+        }
+
+        function changeBackground() {
+            const input = document.getElementById('background-input');
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.body.style.backgroundImage = `url(${e.target.result})`;
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+</body>
+</html>
