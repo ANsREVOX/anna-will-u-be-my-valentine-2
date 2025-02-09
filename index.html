@@ -3,14 +3,39 @@
 <head>
     <title>Picture Gallery</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        #bg-selector {
+            margin: 20px 0;
+            text-align: center;
+        }
         .gallery {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 20px;
+            justify-content: center;
         }
         .image-card {
             border: 1px solid #ccc;
             padding: 10px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
         .like-button {
@@ -20,41 +45,48 @@
             color: white;
             border: none;
             cursor: pointer;
+            border-radius: 5px;
+        }
+        .like-button:hover {
+            background-color: #0056b3;
         }
         .liked {
             background-color: #28a745;
         }
-        #bg-selector {
-            margin: 20px 0;
-        }
     </style>
 </head>
 <body>
-    <div id="bg-selector">
-        <input type="file" accept="image/*" id="background-input">
-        <button onclick="changeBackground()">Set Background</button>
-    </div>
-    
-    <div class="gallery">
-        <div class="image-card">
-            <img src="image1.jpg" alt="Image 1" width="200">
-            <button class="like-button" onclick="toggleLike(this)">Like</button>
+    <header>
+        <h1>Picture Gallery</h1>
+    </header>
+    <div class="container">
+        <div id="bg-selector">
+            <input type="text" id="background-url" placeholder="Enter background image URL">
+            <button onclick="changeBackground()">Set Background</button>
         </div>
-        <div class="image-card">
-            <img src="image2.jpg" alt="Image 2" width="200">
-            <button class="like-button" onclick="toggleLike(this)">Like</button>
-        </div>
-        <div class="image-card">
-            <img src="image3.jpg" alt="Image 3" width="200">
-            <button class="like-button" onclick="toggleLike(this)">Like</button>
-        </div>
-        <div class="image-card">
-            <img src="image4.jpg" alt="Image 4" width="200">
-            <button class="like-button" onclick="toggleLike(this)">Like</button>
-        </div>
-        <div class="image-card">
-            <img src="image5.jpg" alt="Image 5" width="200">
-            <button class="like-button" onclick="toggleLike(this)">Like</button>
+
+        <div class="gallery">
+            <!-- Replace the URLs below with your image URLs -->
+            <div class="image-card">
+                <img src="https://example.com/image1.jpg" alt="Image 1" width="200">
+                <button class="like-button" onclick="toggleLike(this)">Like</button>
+            </div>
+            <div class="image-card">
+                <img src="https://example.com/image2.jpg" alt="Image 2" width="200">
+                <button class="like-button" onclick="toggleLike(this)">Like</button>
+            </div>
+            <div class="image-card">
+                <img src="https://example.com/image3.jpg" alt="Image 3" width="200">
+                <button class="like-button" onclick="toggleLike(this)">Like</button>
+            </div>
+            <div class="image-card">
+                <img src="https://example.com/image4.jpg" alt="Image 4" width="200">
+                <button class="like-button" onclick="toggleLike(this)">Like</button>
+            </div>
+            <div class="image-card">
+                <img src="https://example.com/image5.jpg" alt="Image 5" width="200">
+                <button class="like-button" onclick="toggleLike(this)">Like</button>
+            </div>
         </div>
     </div>
 
@@ -70,13 +102,9 @@
         }
 
         function changeBackground() {
-            const input = document.getElementById('background-input');
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.body.style.backgroundImage = `url(${e.target.result})`;
-                };
-                reader.readAsDataURL(input.files[0]);
+            const url = document.getElementById('background-url').value;
+            if (url) {
+                document.body.style.backgroundImage = `url(${url})`;
             }
         }
     </script>
